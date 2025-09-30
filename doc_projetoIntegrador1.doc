@@ -1,0 +1,100 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2709
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fswiss\fcharset0 Helvetica-Bold;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww28300\viewh17140\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 /**UC05\
+ETAPA 01 **/\
+\
+
+\fs48  
+\f1\b APRESENTA\'c7\'c3O:\
+ 
+\f0\b0\fs36   -Dona Fatima tem uma recente confeitaria com apenas duas funcion\'e1rias, ela anota as vendas e as encomendas em um caderno mas em dias com bastante movimento acaba esquecendo de fazer algumas anota\'e7\'f5es. Com o crescimento da loja, dona Fatima deseja fazer vendas online.\
+\
+
+\fs48 \
+ 
+\f1\b DESCRI\'c7\'c3O DO PROJETO:\
+ 
+\f0\b0   -
+\fs36 Utilizando mySQL ser\'e1 poss\'edvel cadastrar os produtos, fazer o cadastramento de cliente, saber a quantidade vendida de cada produto, atualizar o registro com produtos novos e ter lembretes de promo\'e7\'f5es.\
+
+\fs48 \
+ 
+\f1\b DESCRI\'c7\'c3O DOS USU\'c1RIOS:
+\f0\b0 \
+   
+\fs36 -Dona Fatima(Dona).\
+    -Funcion\'e1rias.\
+    - Pessoas que queiram compras ou encomendar produtos da loja.\
+\
+
+\fs48 \
+ 
+\f1\b NECESSIDADES E REGRAS DE NEG\'d3CIO:\
+   
+\f0\b0 -
+\fs36 Necess\'e1rio uma ferramenta que n\'e3o trave ou apague registros cadastrados.
+\f1\b\fs48 \
+
+\fs36     -
+\f0\b0 Manter o sistema sempre atualizado.\
+    -Cliente fidelidade (Compras acima de 100 reais(mensal) concorrer\'e1 a uma cesta sortida com produtos da loja).\
+
+\fs48 \
+  
+\f1\b REQUISITOS FUNCIONAIS:\
+
+\f0\b0\fs36     -Cadastro de produtos.\
+    -Cadastro e consultar dados de clientes.\
+    -Registro com novos produtos.\
+    -Atualiza\'e7\'e3o e exclus\'e3o de informa\'e7\'f5es.
+\fs48 \
+\
+  
+\f1\b REQUISITOS N\'c3O FUNCIONAIS:\
+
+\f0\b0\fs36     - Sem necessidade de internet para o uso.\
+    -Somente dona Fatima e uma das funcion\'e1rias terem acesso aos cadastros.
+\fs48 \
+\
+
+\f1\b   TECNOLOGIAS PREVISTAS:\
+
+\fs36     - 
+\f0\b0 Java.\
+    -mySQL.\
+\
+  
+\f1\b\fs48 TR\'caS FUNCIONALIDADES:
+\fs36 \
+   
+\f0\b0 -Tela  Cat\'e1logo de produtos.\
+   -Tela de cadastro.\
+   -Tela de fidelidade e promo\'e7\'f5es.\
+\
+  
+\f1\b\fs48 TR\'caS REGISTROS:\
+
+\f0\b0\fs36    -Registro de clientes.\
+   -Registro de produtos\
+   -Registro de pedidos(encomenda).\
+\
+
+\fs48 \
+\
+\
+\
+\
+\
+\
+
+\f1\b \
+
+\f0\b0 \
+\
+\
+ }

@@ -20,7 +20,7 @@ public class ItemPedidoDao {
     private final Connection conn;
    
     public ItemPedidoDao(){
-        this.conn = Conexao.getConexao();
+         this.conn = new Conexao().getConexao();
     }
     
     public boolean salvarItemPedido(ItemPedido item) {
@@ -77,6 +77,13 @@ public class ItemPedidoDao {
         return item;
     }
 
+    public double calcularValorTotal(double valor, int quantidade) {
+        double valorTotal = valor * quantidade;
+        valorTotal = Math.round(valorTotal * 100.0) / 100.0;
+        
+        return valorTotal;
+    }
+    
     public void fecharConexao() {
         try {
             if (conn != null && !conn.isClosed()) {

@@ -2,9 +2,6 @@ package telas;
 
 import beans.Cliente;
 import Dao.ClienteDao;
-import java.awt.Image;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
@@ -12,7 +9,6 @@ public class CadastroCliente extends javax.swing.JFrame {
 
     public CadastroCliente() {
         initComponents();
-
     }
 
     @SuppressWarnings("unchecked")
@@ -62,7 +58,7 @@ public class CadastroCliente extends javax.swing.JFrame {
                 .addComponent(lblLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(207, Short.MAX_VALUE))
+                .addContainerGap(167, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -78,7 +74,7 @@ public class CadastroCliente extends javax.swing.JFrame {
                 .addGap(21, 21, 21))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 840, 180));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 180));
 
         lblCadastro.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
         lblCadastro.setText("Cadastro de cliente");

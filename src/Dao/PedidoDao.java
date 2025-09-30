@@ -14,10 +14,9 @@ import javax.swing.JOptionPane;
 public class PedidoDao {
 
     private final Connection conn;
-    private Conexao conexao;
 
     public PedidoDao() {
-        this.conn = this.conexao.getConexao();
+        this.conn = new Conexao().getConexao();
     }
 
     public boolean salvarPedido(Pedido pedido) {
@@ -32,7 +31,6 @@ public class PedidoDao {
             int linhaAfetada = ps.executeUpdate();
 
             if (linhaAfetada > 0) {
-                JOptionPane.showMessageDialog(null, "Pedido cadastrado com sucesso!");
                 return true;
             }
             return false;
@@ -90,7 +88,7 @@ public class PedidoDao {
         return null;
     }
 
-    public boolean excluir(int idPedido) {
+    public boolean excluirPedido(int idPedido) {
         String sql = "DELETE FROM pedido WHERE idPedido = ?";
 
         try ( PreparedStatement ps = this.conn.prepareStatement(sql)) {

@@ -47,6 +47,7 @@ public class RegistroPedido extends javax.swing.JFrame {
                 return column == 5;
             }
         };
+        
         tablePedido.setModel(modelPedido);
 
         cbTipoBusca.setModel(new DefaultComboBoxModel<>(new String[]{"Produto", "Cliente"}));
@@ -91,6 +92,7 @@ public class RegistroPedido extends javax.swing.JFrame {
         cbTipoBusca = new javax.swing.JComboBox<>();
         lblTipoBusca = new javax.swing.JLabel();
         btnListaItem = new javax.swing.JButton();
+        btnExcluir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -247,6 +249,14 @@ public class RegistroPedido extends javax.swing.JFrame {
         });
         getContentPane().add(btnListaItem, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 630, 150, 30));
 
+        btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnExcluir, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 630, -1, -1));
+
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
@@ -274,6 +284,7 @@ public class RegistroPedido extends javax.swing.JFrame {
 
                 pedidodao.salvarPedido(pedido);
             }
+            model.setRowCount(0);
             atualizarTabelaPedidos();
             JOptionPane.showMessageDialog(this, "Pedido salvo com sucesso!");
 
@@ -322,9 +333,14 @@ public class RegistroPedido extends javax.swing.JFrame {
                 }
             } else if (tipo.equals("Cliente")) {
                 String nomeCliente = tableBusca.getValueAt(selectedRow, 2).toString();
-                for (int i = 0; i < modelPedido.getRowCount(); i++) {
-                    modelPedido.setValueAt(nomeCliente, i, 3);
+
+                int selectedPedidoRow = tablePedido.getSelectedRow();
+                if (selectedPedidoRow >= 0) {
+                    modelPedido.setValueAt(nomeCliente, selectedPedidoRow, 3);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Selecione um item na tabela de pedidos primeiro!");
                 }
+
             }
         }
     }//GEN-LAST:event_btnAdicionarItemActionPerformed
@@ -379,7 +395,8 @@ public class RegistroPedido extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) tablePedido.getModel();
 
         if (model.getRowCount() == 0) {
-            JOptionPane.showMessageDialog(this, "Não há itens no pedido!", "Aviso", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Não há itens no pedido!",
+            "Aviso", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
@@ -394,26 +411,65 @@ public class RegistroPedido extends javax.swing.JFrame {
                 double valor = Double.parseDouble(model.getValueAt(i, 2).toString());
                 String nomeCliente = model.getValueAt(i, 3).toString();
                 int quantidade = Integer.parseInt(model.getValueAt(i, 4).toString());
-                double valorTotal = Double.parseDouble(model.getValueAt(i, 5).toString());
-
+                double valorTotal= Double.parseDouble(model.getValueAt(i, 5).toString()); ;
+              
                 item.setIdPedido(idPedido);
                 item.setNomeProduto(nomeProduto);
                 item.setValor(valor);
                 item.setNomeCliente(nomeCliente);
                 item.setQuantidade(quantidade);
                 item.setValorTotal(valorTotal);
-
+  
                 boolean sucesso = itemDao.salvarItemPedido(item);
                 if (!sucesso) {
-                    JOptionPane.showMessageDialog(this, "Erro ao salvar item do pedido!", "Erro", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Erro ao salvar item do pedido!",
+                    "Erro", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Erro ao finalizar pedido: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Erro ao listar pedido: " + e.getMessage(),
+            "Erro", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
         }
     }//GEN-LAST:event_btnListaItemActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        int selectedRow = tablePedido.getSelectedRow();
+
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this,
+                    "Selecione um pedido para excluir!",
+                    "Aviso",
+                    JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        try {
+            int idPedido = (int) tablePedido.getValueAt(selectedRow, 0);
+
+            PedidoDao pedidoDao = new PedidoDao();
+            boolean sucesso = pedidoDao.excluirPedido(idPedido);
+
+            if (sucesso) {
+                JOptionPane.showMessageDialog(this,
+                        "Pedido excluído com sucesso!",
+                        "Sucesso",
+                        JOptionPane.INFORMATION_MESSAGE);
+
+                ((DefaultTableModel) tablePedido.getModel()).removeRow(selectedRow);
+
+                atualizarTabelaPedidos();
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this,
+                    "Erro ao excluir pedido: " + e.getMessage(),
+                    "Erro",
+                    JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
+
+    }//GEN-LAST:event_btnExcluirActionPerformed
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -426,6 +482,7 @@ public class RegistroPedido extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionarItem;
     private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnFinalizar;
     private javax.swing.JButton btnListaItem;
     private javax.swing.JComboBox<String> cbTipoBusca;

@@ -103,22 +103,6 @@ public class ProdutoDao {
         }
     }
 
-    public boolean excluirProduto(String nomeProduto) {
-        String sql = "DELETE FROM produto WHERE nome = ?";
-
-        try ( PreparedStatement ps = this.conn.prepareStatement(sql)) {
-            ps.setString(1, nomeProduto);
-
-            int linhaAfetada = ps.executeUpdate();
-            return linhaAfetada > 0;
-
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Erro ao excluir produto: " + e.getMessage(),
-                    "Erro", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-    }
-
     public Produto buscarProdutoPorId(int idProduto) {
         String sql = "SELECT * FROM produto WHERE idProduto = ?";
 
@@ -146,6 +130,22 @@ public class ProdutoDao {
         return produto;
     }
 
+    public boolean excluirProduto(String nomeProduto) {
+        String sql = "DELETE FROM produto WHERE nome = ?";
+
+        try ( PreparedStatement ps = this.conn.prepareStatement(sql)) {
+            ps.setString(1, nomeProduto);
+
+            int linhaAfetada = ps.executeUpdate();
+            return linhaAfetada > 0;
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao excluir produto: " + e.getMessage(),
+                    "Erro", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+    }
+    
     public void fecharConexao() {
         try {
             if (conn != null && !conn.isClosed()) {

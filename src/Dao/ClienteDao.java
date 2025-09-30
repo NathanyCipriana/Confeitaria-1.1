@@ -43,7 +43,7 @@ public class ClienteDao {
             return false;
         }
     }
-
+    
     public List<Cliente> buscarPorNome(String nomeCliente) {
         String sql = "SELECT * FROM cliente WHERE nome LIKE ?";
         List<Cliente> clientes = new ArrayList<>();
@@ -69,29 +69,6 @@ public class ClienteDao {
         return clientes;
     }
     
-    public List<Cliente> listarTodosClientes() {
-        String sql = "SELECT * FROM cliente";
-        List<Cliente> clientes = new ArrayList<>();
-        
-        try (PreparedStatement ps = this.conn.prepareStatement(sql);
-             ResultSet rs = ps.executeQuery()) {
-            
-            while (rs.next()) {
-                Cliente cliente = new Cliente();
-                cliente.setIdCliente(rs.getInt("idCliente"));
-                cliente.setNomeCliente(rs.getString("nome"));
-                cliente.setTelefone(rs.getString("telefone"));
-                cliente.setEmail(rs.getString("email"));
-                cliente.setEndereco(rs.getString("endereco"));
-                clientes.add(cliente);
-            }
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Erro ao listar clientes: " + e.getMessage(), 
-                                        "Erro", JOptionPane.ERROR_MESSAGE);
-        }
-        return clientes;
-    }
-    
     public boolean excluirCliente(String nomeCliente) {
         String sql = "DELETE FROM cliente WHERE nome = ?";
 
@@ -105,6 +82,16 @@ public class ClienteDao {
             JOptionPane.showMessageDialog(null, "Erro ao excluir cliente: " + e.getMessage(),
                     "Erro", JOptionPane.ERROR_MESSAGE);
             return false;
+        }
+    }
+    
+    public void fecharConexao() {
+        try {
+            if (conn != null && !conn.isClosed()) {
+                conn.close();
+            }
+        } catch (SQLException e) {
+            System.err.println("Erro ao fechar conexão: " + e.getMessage());
         }
     }
 
